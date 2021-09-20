@@ -5,61 +5,64 @@ use PHPUnit\Framework\TestCase;
 
 class MathTest extends TestCase
 {
-	private Math $mathObject;
 
 	public function setUp(): void
 	{
-		$this->mathObject = new Math(4, 6);
+
 	}
 
-	public function testNewMath(): void
+	public function testNewMathException(): void
 	{
 		$this->expectException(ArgumentCountError::class);
-
-		$this->mathObject = new Math();
+		new Math();
 	}
 
 	public function testGetX(): void
 	{
-		$this->assertEquals(4, $this->mathObject->getX());
+		$mathObject = new Math(4, 6);
+		$this->assertEquals(4, $mathObject->getX());
 	}
 
 	public function testGetY(): void
 	{
-		$this->assertEquals(6, $this->mathObject->getY());
+		$mathObject = new Math(4, 6);
+		$this->assertEquals(6, $mathObject->getY());
 	}
 
 	public function testSetY(): void
 	{
-		$this->mathObject->setY(3);
-		$this->assertEquals(3, $this->mathObject->getY());
+		$mathObject = new Math(4, 6);
+		$mathObject->setY(3);
+		$this->assertEquals(3, $mathObject->getY());
 
-		$this->mathObject->setY(7);
-		$this->assertEquals(7, $this->mathObject->getY());
-		$this->assertFalse($this->mathObject->getY() > 7);
-		$this->assertFalse($this->mathObject->getY() < 7);
+		$mathObject->setY(7);
+		$this->assertEquals(7, $mathObject->getY());
+		$this->assertFalse($mathObject->getY() > 7);
+		$this->assertFalse($mathObject->getY() < 7);
 	}
 
 	public function testSetX(): void
 	{
-		$this->mathObject->setX(5);
-		$this->assertEquals(5, $this->mathObject->getX());
+		$mathObject = new Math(4, 6);
+		$mathObject->setX(5);
+		$this->assertEquals(5, $mathObject->getX());
 
-		$this->mathObject->setX(2);
-		$this->assertEquals(2, $this->mathObject->getX());
-		$this->assertFalse($this->mathObject->getX() > 2);
-		$this->assertFalse($this->mathObject->getX() < 2);
+		$mathObject->setX(2);
+		$this->assertEquals(2, $mathObject->getX());
+		$this->assertFalse($mathObject->getX() > 2);
+		$this->assertFalse($mathObject->getX() < 2);
 	}
 
 	public function testCalc(): void
 	{
-		$math1 = $this->mathObject->calc(fn ($x, $y) => $x + $y);
+		$mathObject = new Math(4, 6);
+		$math1 = $mathObject->calc(fn ($x, $y) => $x + $y);
 
 		$this->assertEquals(10, $math1);
 		$this->assertFalse($math1 > 10);
 		$this->assertFalse($math1 < 10);
 
-		$math2 = $this->mathObject->calc(fn ($x, $y) => $x * $y);
+		$math2 = $mathObject->calc(fn ($x, $y) => $x * $y);
 
 		$this->assertEquals(24, $math2);
 		$this->assertFalse($math2 > 24);
